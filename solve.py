@@ -17,12 +17,12 @@ groups = groups.set_index('uid')
 edus = edus.set_index('uid')
 
 train = ages.copy()
-train['num_friends'] = [len(friendships[friendships.index==uid]) for uid in tqdm(train.index)]
-train['num_groups'] = [len(groups[groups.index==uid]) for uid in tqdm(train.index)]
-train['friend_mean_age'] = [ages.loc[ages.index.intersection(friendships[friendships.index==uid].fuid.values),:]['age'].mean() for uid in tqdm(train.index)]
-train['friend_median_age'] = [ages.loc[ages.index.intersection(friendships[friendships.index==uid].fuid.values),:]['age'].median() for uid in tqdm(train.index)]
-train['age_from_school'] = [17.5 + 2021 - edus.loc[uid]['school_education'] for uid in tqdm(train.index)]
-train['higher_education'] = [23.5 + 2021 - edus.loc[uid]['graduation_5'] for uid in tqdm(train.index)]
+train['num_friends'] = [len(friendships[friendships.index==uid]) for uid in (train.index)]
+train['num_groups'] = [len(groups[groups.index==uid]) for uid in (train.index)]
+train['friend_mean_age'] = [ages.loc[ages.index.intersection(friendships[friendships.index==uid].fuid.values),:]['age'].mean() for uid in (train.index)]
+train['friend_median_age'] = [ages.loc[ages.index.intersection(friendships[friendships.index==uid].fuid.values),:]['age'].median() for uid in (train.index)]
+train['age_from_school'] = [17.5 + 2021 - edus.loc[uid]['school_education'] for uid in (train.index)]
+train['higher_education'] = [23.5 + 2021 - edus.loc[uid]['graduation_5'] for uid in (train.index)]
 train = train.merge(edus, left_index=True, right_index=True)
 
 X = train.copy()
